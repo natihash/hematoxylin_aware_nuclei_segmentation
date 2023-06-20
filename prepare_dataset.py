@@ -8,6 +8,7 @@ from skimage.draw import polygon_perimeter
 from skimage.filters import threshold_otsu
 from skimage.draw import disk
 import ntpath
+import stainNorm_Vahadane
 
 def xml_to_semantic(xml):
 	tree = ET.parse(xml)
@@ -65,9 +66,19 @@ def xml_to_marker(xml):
 	return mark
 
 xmls = glob.glob("Monuseg_dataset/Annotations/*")
-for i, name in enumerate(xmls):
-	sema = xml_to_semantic(name)
-	mark = xml_to_marker(name)
-	cv2.imwrite("modified dataset/semas/"+ntpath.basename(name)[:-4]+".png", sema)
-	cv2.imwrite("modified dataset/markers/"+ntpath.basename(name)[:-4]+".png", mark)
+images = glob.glob("Monuseg_dataset/Tissue Images/*")
+
+# for i, name in enumerate(xmls):
+# 	sema = xml_to_semantic(name)
+# 	mark = xml_to_marker(name)
+# 	cv2.imwrite("modified dataset/semas/"+ntpath.basename(name)[:-4]+".png", sema)
+# 	cv2.imwrite("modified dataset/markers/"+ntpath.basename(name)[:-4]+".png", mark)
+# 	print(i, end=" ")
+
+for i, name in enumerate(images):
+	image = cv2.imread(name)
+	image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+	n = stainNorm_Vahadane.Normalizer()
+	hem = n.hematoxylin(image)
+	cv2.imwrite("modified dataset/hemas/"+ntpath.basename(name)[:-4]+".png", 255*hem)
 	print(i, end=" ")
