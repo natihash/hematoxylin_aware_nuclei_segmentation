@@ -11,9 +11,9 @@ import ntpath
 
 def val_ret(num):
     if num < 125:
-        return 1
+        return 120
     else:
-        return 2
+        return 240
 
 def xml_to_weights(xml, hem_name):
 	tree = ET.parse(xml)
@@ -41,11 +41,13 @@ def xml_to_weights(xml, hem_name):
 		rr, cc = polygon(x_pts, y_pts)
 		temp[rr, cc] = 1
 		temp2 = temp*hema
-
-	return mark
+		weight[rr, cc] = val_ret(np.sum(temp2)/np.sum(temp))
+	return weight
 
 xmls = glob.glob("Monuseg_dataset/Annotations/*")
-for i, name in enumerate(xmls):
-	weight = xml_to_weights(name)
-	np.save("modified dataset/weights/"+ntpath.basename(name)[:-4]+".npy", weight)
+images = glob.glob("Monuseg_dataset/Tissue Images/*")
+for i in range(len(xmls)):
+	weight = xml_to_weights(xmls[i], images[i])
+	cv2.imwrite("modified dataset/weights/"+ntpath.basename(name)[:-4]+".png", weight)
 	print(i, end=" ")
+	break
