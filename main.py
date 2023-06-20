@@ -16,11 +16,11 @@ from skimage.segmentation import watershed
 import os
 import glob
 
-if os.path.isfile("my_model"):
+if os.path.isfile("models/my_model"):
 	pass
 else:
 	url="https://drive.google.com/uc?id=1OuVDKB1ElJ3DZyV-vSHULmRrUKPwIxxp"
-	output_f = "my_model"
+	output_f = "models/my_model"
 	gdown.download(url, output_f, quiet=False)
 	st.write("done")
 
