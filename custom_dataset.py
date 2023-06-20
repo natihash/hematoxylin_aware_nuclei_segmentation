@@ -6,17 +6,6 @@ import torch.nn.functional as F
 from torch.utils.data import Dataset
 from torchvision import transforms
 
-class MyRotationTransform:
-    def __init__(self, angles):
-        self.angles = angles
-
-    def __call__(self, x):
-        angle = random.choice(self.angles)
-        return TF.rotate(x, angle)
-
-transform_train = transforms.Compose([transforms.RandomVerticalFlip(),MyRotationTransform([0, 90, 180, 270]),
-                                     transforms.RandomHorizontalFlip()])
-
 class CustomImageDataset(Dataset):
     def __init__(self, images, markers, semantics, hemas, weights, transforms):
         self.images = images
