@@ -10,7 +10,6 @@ import cv2
 import torch
 import gdown
 import torch.nn as nn
-import torchvision
 from models import NestedUNet
 from skimage import measure
 from skimage.segmentation import watershed
