@@ -1,12 +1,8 @@
 import cv2
 import glob
-import os
 import xml.etree.ElementTree as ET
 import numpy as np
 from skimage.draw import polygon
-from skimage.draw import polygon_perimeter
-from skimage.filters import threshold_otsu
-from skimage.draw import disk
 import ntpath
 
 def val_ret(num):
