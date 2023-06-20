@@ -1,16 +1,5 @@
 import torch
 import torch.nn as nn
-# import torchvision.transforms.functional as TF
-import cv2
-import glob 
-import os
-# import xml.etree.ElementTree as ET
-import numpy as np
-# import matplotlib.pyplot as plt
-import random
-# import torch.nn.functional as F
-from torch.utils.data import Dataset
-
 
 class VGGBlock(nn.Module):
     def __init__(self, in_channels, middle_channels, out_channels):
