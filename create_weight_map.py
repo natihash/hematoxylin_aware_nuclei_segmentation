@@ -10,7 +10,7 @@ from skimage.draw import disk
 import ntpath
 
 def val_ret(num):
-    if num < 115:
+    if num < 120:
         return 120
     else:
         return 240
@@ -45,8 +45,8 @@ def xml_to_weights(xml, hem_name):
 	return weight
 
 xmls = glob.glob("Monuseg_dataset/Annotations/*")
-images = glob.glob("Monuseg_dataset/Tissue Images/*")
+hemas = glob.glob("modified dataset/hemas/*")
 for i in range(len(xmls)):
-	weight = xml_to_weights(xmls[i], images[i])
+	weight = xml_to_weights(xmls[i], hemas[i])
 	cv2.imwrite("modified dataset/weights/"+ntpath.basename(xmls[i])[:-4]+".png", weight)
 	print(i)
