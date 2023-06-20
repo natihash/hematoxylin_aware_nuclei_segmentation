@@ -68,12 +68,12 @@ def xml_to_marker(xml):
 xmls = glob.glob("Monuseg_dataset/Annotations/*")
 images = glob.glob("Monuseg_dataset/Tissue Images/*")
 
-# for i, name in enumerate(xmls):
-# 	sema = xml_to_semantic(name)
-# 	mark = xml_to_marker(name)
-# 	cv2.imwrite("modified dataset/semas/"+ntpath.basename(name)[:-4]+".png", sema)
-# 	cv2.imwrite("modified dataset/markers/"+ntpath.basename(name)[:-4]+".png", mark)
-# 	print(i, end=" ")
+for i, name in enumerate(xmls):
+	sema = xml_to_semantic(name)
+	mark = xml_to_marker(name)
+	cv2.imwrite("modified dataset/semas/"+ntpath.basename(name)[:-4]+".png", sema)
+	cv2.imwrite("modified dataset/markers/"+ntpath.basename(name)[:-4]+".png", mark)
+	print(i, end=" ")
 
 for i, name in enumerate(images):
 	image = cv2.imread(name)

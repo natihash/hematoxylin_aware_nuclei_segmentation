@@ -9,8 +9,15 @@ from skimage.filters import threshold_otsu
 from skimage.draw import disk
 import ntpath
 
-def xml_to_weights(xml):
+def val_ret(num):
+    if num < 125:
+        return 1
+    else:
+        return 2
+
+def xml_to_weights(xml, hem_name):
 	tree = ET.parse(xml)
+	hema = cv2.imread(hem_name, 0)
 	root = tree.getroot()
 	weight = np.zeros((1000, 1000))
 	for i in range(1, len(root[0][1])):
@@ -32,11 +39,9 @@ def xml_to_weights(xml):
 		y_pts = np.array(y_pts)
 		pts = np.array(pts)
 		rr, cc = polygon(x_pts, y_pts)
-		temp[rr, cc] = 255
-		temp = temp.astype('uint8')
-		temp = cv2.distanceTransform(temp, distanceType=cv2.DIST_L2, maskSize=3, dstType=cv2.CV_8U)
-		temp = 1.0*(temp > np.amax(temp)/2)
-		mark[temp>0] = 255
+		temp[rr, cc] = 1
+		temp2 = temp*hema
+
 	return mark
 
 xmls = glob.glob("Monuseg_dataset/Annotations/*")
