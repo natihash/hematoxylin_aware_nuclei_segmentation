@@ -1,10 +1,6 @@
 import torch
-import torchvision.transforms.functional as TF
 import cv2
-import random
-import torch.nn.functional as F
 from torch.utils.data import Dataset
-from torchvision import transforms
 
 class CustomImageDataset(Dataset):
     def __init__(self, images, markers, semantics, hemas, weights, transforms):
