@@ -1,0 +1,14 @@
+# Ignore all PNG, TIF, and XML files anywhere in the repository
+*.png
+*.tif
+*.xml
+
+# Common Python ignores
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+env/
+venv/
